@@ -1,0 +1,25 @@
+version: "3"
+
+services:
+  db:
+    container_name: clean_compliment_api
+    build:
+      context: ./
+      dockerfile: ./Dockerfile
+    restart: always
+    volumes:
+      - ./database:/home/pgdata/data
+    ports:
+      - "5432:5432"
+    tty: true
+
+  pgadmin:
+    container_name: pgadmin
+    image: dpage/pgadmin4
+    environment:
+      PGADMIN_DEFAULT_EMAIL: pgadmin4@pgadmin.org
+      PGADMIN_DEFAULT_PASSWORD: admin
+
+    ports:
+      - "8080:80"
+    tty: true
