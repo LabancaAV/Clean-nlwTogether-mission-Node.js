@@ -27,7 +27,10 @@ export class UserRepositoryImpl implements UserRepository {
         .createQueryBuilder('user')
         .select(
           `
-          user.name
+          user.id_user,
+          user.name,
+          user.email,
+          user.password
           `
         )
         .where('email = :email', { email })
