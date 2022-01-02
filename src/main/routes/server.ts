@@ -1,7 +1,8 @@
 import express, { json, Request, Response } from 'express';
-import { verifyJwt } from '../../shared/migrations/helpers/verify-jwt-helper';
+import { verifyJwt } from '../../shared/helpers/verify-jwt-helper';
 import { adaptRoute } from '../adapters/router';
 import { authenticateUserController } from '../factories/authenticate-user-controller';
+import { createTagController } from '../factories/create-tag-controller';
 import { createUserController } from '../factories/create-user-controller';
 import { listUsersController } from '../factories/list-users-controller';
 
@@ -20,6 +21,11 @@ server.post('/user/create', async (req: Request, res: Response) => {
 
 server.get('/user/list', verifyJwt, async (req: Request, res: Response) => {
   const httpResponse = await adaptRoute(listUsersController(), req);
+  res.status(httpResponse.statusCode).json(httpResponse.data);
+});
+
+server.post('/tag/create', verifyJwt, async (req: Request, res: Response) => {
+  const httpResponse = await adaptRoute(createTagController(), req);
   res.status(httpResponse.statusCode).json(httpResponse.data);
 });
 

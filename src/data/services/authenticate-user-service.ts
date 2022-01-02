@@ -1,5 +1,5 @@
 import { UserRepositoryImpl } from '../../infra/repositories/user-repository';
-import { compare, compareSync } from 'bcryptjs';
+import { compare } from 'bcryptjs';
 import { sign } from 'jsonwebtoken';
 import env from '../../config/env';
 import { AuthenticateUserUseCase } from '../../domain/usecases/authenticate-user-usecase';
@@ -17,7 +17,7 @@ export class AuthenticateUserService implements AuthenticateUserUseCase {
     if(!passwordMatch){
         throw new Error("Email/Password incorrect");
     }
-    console.log(user.id)
+    console.log(user.id_user)
     const token = sign(
         {
             email: user.email

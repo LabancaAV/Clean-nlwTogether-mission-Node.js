@@ -7,7 +7,7 @@ import { v4 as uuid } from "uuid";
 class PostgresTagEntity {
 
     @PrimaryColumn()
-    readonly id_user: string;
+    readonly id_tag: string;
 
     @Column()
     name: string;
@@ -24,8 +24,8 @@ class PostgresTagEntity {
     }
 
     constructor() {
-        if(!this.id_user){
-            this.id_user = uuid();
+        if(!this.id_tag){
+            this.id_tag = uuid();
         }
     }
 }
