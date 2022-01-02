@@ -19,5 +19,16 @@ export class TagRepositoryImpl implements TagRepository {
     return await repository.save({name: name, id_tag: id_tag})
   }
 
+  async listTags(): Promise<any>{
+    try{
+        const repository = getManager().getRepository(PostgresTagEntity);
+        return await repository.find()
+      } catch(error) {
+        console.log(error);
+        
+        return false;
+      }
+  }
+
   
 }
