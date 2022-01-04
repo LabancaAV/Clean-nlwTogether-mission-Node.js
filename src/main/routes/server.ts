@@ -6,6 +6,7 @@ import { createTagController } from '../factories/create-tag-controller';
 import { createUserController } from '../factories/create-user-controller';
 import { listUsersController } from '../factories/list-users-controller';
 import { listTagsController } from '../factories/list-tags-controller';
+import { createComplimentController } from '../factories/create-compliment-controller';
 
 const server = express.Router();
 server.use(json());
@@ -32,6 +33,11 @@ server.post('/tag/create', verifyJwt, async (req: Request, res: Response) => {
 
 server.get('/tag/list', verifyJwt, async (req: Request, res: Response) => {
   const httpResponse = await adaptRoute(listTagsController(), req);
+  res.status(httpResponse.statusCode).json(httpResponse.data);
+});
+
+server.post('/compliment/create', verifyJwt, async (req: Request, res: Response) => {
+  const httpResponse = await adaptRoute(createComplimentController(), req);
   res.status(httpResponse.statusCode).json(httpResponse.data);
 });
 

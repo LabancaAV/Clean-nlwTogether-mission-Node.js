@@ -1,6 +1,8 @@
 import { Request, Response } from 'express';
 import { verify } from 'jsonwebtoken';
 
+
+
 export function verifyJwt(req: Request, res: Response, next: Function) {
   const token = req.headers['authorization']?.replace('Bearer ', '');
   verify(token, '668685580583b0b9a11565ce6d59a570', (error, decoded) => {
@@ -12,8 +14,9 @@ export function verifyJwt(req: Request, res: Response, next: Function) {
         })
         .end();
 
-    req.params.sessionGroup = decoded.group;
-    req.params.sessionId = decoded.id;
+        console.log(decoded);
+        
+    req.params.user_sender = decoded.sub;
     next();
   });
 }
