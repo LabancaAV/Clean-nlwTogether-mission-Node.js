@@ -15,4 +15,16 @@ export class ComplimentRepositoryImpl implements ComplimentRepository {
         message: message
     })
   }  
+
+  async listUserReceiveCompliments(id_user: string): Promise<any>{
+    const repository = getManager().getRepository(PostgresComplimentEntity);
+
+    const compliments = await repository.find({
+      where: {
+        user_receiver: id_user
+    },
+    relations: ["userSender", "userReceiver", "tag"]
+    })
+    return compliments;
+  }
 }

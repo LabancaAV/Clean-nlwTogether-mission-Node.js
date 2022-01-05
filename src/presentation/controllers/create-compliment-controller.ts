@@ -8,7 +8,6 @@ export class CreateComplimentController implements Controller {
   async handle(request: any): Promise<HttpResponse<any>> {
     try {
         console.log(request);
-        
       return successResponse(await this.createComplimentUseCase.createCompliment(request));
     } catch (error) {
       return errorResponse(error);

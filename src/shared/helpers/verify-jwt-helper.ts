@@ -13,10 +13,9 @@ export function verifyJwt(req: Request, res: Response, next: Function) {
           message: 'Unauthorized',
         })
         .end();
-
-        console.log(decoded);
         
     req.params.user_sender = decoded.sub;
+    req.params.id_user = decoded.sub;
     next();
   });
 }
