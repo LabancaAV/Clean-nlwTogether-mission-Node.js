@@ -8,6 +8,7 @@ import { listUsersController } from '../factories/list-users-controller';
 import { listTagsController } from '../factories/list-tags-controller';
 import { createComplimentController } from '../factories/create-compliment-controller';
 import { listUserReceiveComplimentsController } from '../factories/list-user-receive-compliments';
+import { listUserSendComplimentsController } from '../factories/list-user-send-compliments';
 
 const server = express.Router();
 server.use(json());
@@ -44,6 +45,11 @@ server.post('/compliment/create', verifyJwt, async (req: Request, res: Response)
 
 server.get('/compliment/list/user-receive', verifyJwt, async (req: Request, res: Response) => {
   const httpResponse = await adaptRoute(listUserReceiveComplimentsController(), req);
+  res.status(httpResponse.statusCode).json(httpResponse.data);
+});
+
+server.get('/compliment/list/user-send', verifyJwt, async (req: Request, res: Response) => {
+  const httpResponse = await adaptRoute(listUserSendComplimentsController(), req);
   res.status(httpResponse.statusCode).json(httpResponse.data);
 });
 
